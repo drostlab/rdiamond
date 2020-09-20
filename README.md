@@ -4,7 +4,7 @@
 
 ### Motivation 
 
-Homepage: drostlab.github.io/rdiamond/
+__Homepage__: https://drostlab.github.io/rdiamond/ 
 
 [DIAMOND](http://www.diamondsearch.org/index.php) is a sequence aligner for protein and translated DNA searches, designed for high performance analysis of big sequence data. The key features are:
 
