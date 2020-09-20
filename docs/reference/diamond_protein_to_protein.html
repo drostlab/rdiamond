@@ -166,8 +166,10 @@ or a <code>fasta</code> file that was previously converted into a blast-able dat
     <tr>
       <th>sensitivity_mode</th>
       <td><p>specify the level of alignment sensitivity. The higher the sensitivity level, the more deep homologs can be found, but at the cost of reduced computational speed.</p><ul>
-<li><p><code>sensitivity_mode = "fast"</code> : fastest alignment mode, but least sensitive (default).</p></li>
-<li><p><code>sensitivity_mode = "more-sensitive"</code> : second fastest alignment mode, but second least sensitive.</p></li>
+<li><p><code>sensitivity_mode = "fast"</code> : fastest alignment mode, but least sensitive (default). Designed for finding hits of &gt;70<!-- % identity and short read alignment such as NGS reads. --></p></li>
+<li><p><code>sensitivity_mode = "mid-sensitive"</code> : fast alignments between the <code>fast</code> mode and the sensitive mode in sensitivity.</p></li>
+<li><p><code>sensitivity_mode = "sensitive"</code> : fast alignments, but full sensitivity for hits &gt;40<!-- % identity. --></p></li>
+<li><p><code>sensitivity_mode = "more-sensitive"</code> : more sensitive than the <code>sensitive</code> mode.</p></li>
 <li><p><code>sensitivity_mode = "very-sensitive"</code> : sensitive alignment mode.</p></li>
 <li><p><code>sensitivity_mode = "ultra-sensitive"</code> : most sensitive alignment mode (sensitivity as high as BLASTP).</p></li>
 </ul></td>
@@ -198,7 +200,7 @@ Available options are:</p><ul>
     </tr>
     <tr>
       <th>cores</th>
-      <td><p>number of cores for parallel BLAST searches.</p></td>
+      <td><p>number of cores for parallel DIAMOND searches.</p></td>
     </tr>
     <tr>
       <th>max_target_seqs</th>

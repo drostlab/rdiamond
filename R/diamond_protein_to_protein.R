@@ -13,8 +13,10 @@
 #' }
 #' @param sensitivity_mode specify the level of alignment sensitivity. The higher the sensitivity level, the more deep homologs can be found, but at the cost of reduced computational speed.
 #' \itemize{
-#'   \item \code{sensitivity_mode = "fast"} : fastest alignment mode, but least sensitive (default).
-#'   \item \code{sensitivity_mode = "more-sensitive"} : second fastest alignment mode, but second least sensitive.
+#'   \item \code{sensitivity_mode = "fast"} : fastest alignment mode, but least sensitive (default). Designed for finding hits of >70% identity and short read alignment such as NGS reads.
+#'   \item \code{sensitivity_mode = "mid-sensitive"} : fast alignments between the \code{fast} mode and the sensitive mode in sensitivity.
+#'   \item \code{sensitivity_mode = "sensitive"} : fast alignments, but full sensitivity for hits >40% identity.
+#'   \item \code{sensitivity_mode = "more-sensitive"} : more sensitive than the \code{sensitive} mode.
 #'   \item \code{sensitivity_mode = "very-sensitive"} : sensitive alignment mode.
 #'   \item \code{sensitivity_mode = "ultra-sensitive"} : most sensitive alignment mode (sensitivity as high as BLASTP).
 #' }
@@ -31,7 +33,7 @@
 #'  \item \code{out_format = "xml"} : XML
 #'  \item \code{out_format = "csv"} : Comma-separated file
 #'  }
-#' @param cores number of cores for parallel BLAST searches.
+#' @param cores number of cores for parallel DIAMOND searches.
 #' @param max_target_seqs maximum number of aligned sequences that shall be retained. Please be aware that \code{max_target_seqs} selects best hits based on the database entry and not by the best e-value. See details here: https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/bty833/5106166 .
 #' @param hard_mask shall low complexity regions be hard masked with TANTAN? Default is \code{db_hard_mask = TRUE}.
 #' @param diamond_exec_path a path to the DIAMOND executable or \code{conda/miniconda} folder.
@@ -137,6 +139,8 @@ diamond_protein_to_protein <- function(query,
     sensitivity_mode,
     c(
       "fast",
+      "mid-sensitive",
+      "sensitive",
       "more-sensitive",
       "very-sensitive",
       "ultra-sensitive"

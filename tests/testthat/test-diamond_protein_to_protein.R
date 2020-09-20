@@ -38,6 +38,34 @@ test_that("All diamond sensitivity modes work properly", {
     expect_equal(nrow(diamond_example_fast), 20)
     expect_equal(ncol(diamond_example_fast), 20)
 
+    # test mode: mid-sensitive
+    diamond_example_mid_sensitive <- diamond_protein_to_protein(
+      query   = system.file('seqs/qry_aa.fa', package = 'rdiamond'),
+      subject = system.file('seqs/sbj_aa.fa', package = 'rdiamond'),
+      sensitivity_mode = "mid-sensitive",
+      diamond_exec_path = "/opt/miniconda3/bin/",
+      output_path = tempdir(),
+      db_import  = FALSE,
+      cores = 1
+    )
+
+    expect_equal(nrow(diamond_example_mid_sensitive), 20)
+    expect_equal(ncol(diamond_example_mid_sensitive), 20)
+
+    # test mode: sensitive
+    diamond_example_sensitive <- diamond_protein_to_protein(
+      query   = system.file('seqs/qry_aa.fa', package = 'rdiamond'),
+      subject = system.file('seqs/sbj_aa.fa', package = 'rdiamond'),
+      sensitivity_mode = "sensitive",
+      diamond_exec_path = "/opt/miniconda3/bin/",
+      output_path = tempdir(),
+      db_import  = FALSE,
+      cores = 1
+    )
+
+    expect_equal(nrow(diamond_example_sensitive), 20)
+    expect_equal(ncol(diamond_example_sensitive), 20)
+
   # test mode: more-sensitive
     diamond_example_more_sensitive <- diamond_protein_to_protein(
       query   = system.file('seqs/qry_aa.fa', package = 'rdiamond'),
