@@ -1,0 +1,12 @@
+^rdiamond\.Rproj$
+^\.Rproj\.user$
+NEWS.md
+.Rprofile
+man-roxygen
+README.html
+README.Rmd
+COPYING
+^\.travis\.yml$
+^\.httr-oauth$
+docs
+LICENSE
