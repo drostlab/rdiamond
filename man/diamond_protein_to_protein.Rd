@@ -29,10 +29,10 @@ diamond_protein_to_protein(
 \item{subject}{path to subject file in fasta format or blast-able database.}
 
 \item{output_path}{path to folder at which DIAMOND output table shall be stored.
-Default is \code{output.path = NULL} (hence \code{getwd()} is used).}
+Default is \code{output_path = NULL} (hence \code{getwd()} is used).}
 
-\item{is_subject_db}{logical specifying whether or not the \code{subject} file is a file in fasta format (\code{is.subject.db = FALSE}; default)
-or a \code{fasta} file that was previously converted into a blast-able database using \code{makeblastdb} (\code{is.subject.db = TRUE}).}
+\item{is_subject_db}{logical specifying whether or not the \code{subject} file is a file in fasta format (\code{is_subject_db = FALSE}; default)
+or a \code{fasta} file that was previously converted into a blast-able database using \code{diamond makedb} (\code{is_subject_db = TRUE}).}
 
 \item{task}{protein search task option. Options are:
 \itemize{

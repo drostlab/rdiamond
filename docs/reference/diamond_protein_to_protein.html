@@ -150,12 +150,12 @@ against a blast-able database or fasta file.</p>
     <tr>
       <th>output_path</th>
       <td><p>path to folder at which DIAMOND output table shall be stored.
-Default is <code>output.path = NULL</code> (hence <code><a href='https://rdrr.io/r/base/getwd.html'>getwd()</a></code> is used).</p></td>
+Default is <code>output_path = NULL</code> (hence <code><a href='https://rdrr.io/r/base/getwd.html'>getwd()</a></code> is used).</p></td>
     </tr>
     <tr>
       <th>is_subject_db</th>
-      <td><p>logical specifying whether or not the <code>subject</code> file is a file in fasta format (<code>is.subject.db = FALSE</code>; default)
-or a <code>fasta</code> file that was previously converted into a blast-able database using <code>makeblastdb</code> (<code>is.subject.db = TRUE</code>).</p></td>
+      <td><p>logical specifying whether or not the <code>subject</code> file is a file in fasta format (<code>is_subject_db = FALSE</code>; default)
+or a <code>fasta</code> file that was previously converted into a blast-able database using <code>diamond makedb</code> (<code>is_subject_db = TRUE</code>).</p></td>
     </tr>
     <tr>
       <th>task</th>
