@@ -51,6 +51,14 @@ sudo apt-get install libpq-dev
 ### For all systems install `rdiamond` by typing
 
 ```r
+# install Bioconductor
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install()
+# install Biostrings -> see here for different Biostrings verions:
+# http://bioconductor.org/about/release-announcements/
+BiocManager::install(c("Biostrings"))
+
 # install.packages("devtools")
 # install the current version of rdiamond on your system
 devtools::install_github("drostlab/rdiamond", build_vignettes = TRUE, dependencies = TRUE)
