@@ -1,9 +1,9 @@
-#' @title Perform Protein to Protein DIAMOND Searches (BLASTP)
-#' @description Run protein to protein DIAMOND of reference sequences
+#' @title Perform Protein to Protein DIAMOND2 Searches (BLASTP)
+#' @description Run protein to protein DIAMOND2 of reference sequences
 #' against a blast-able database or fasta file.
 #' @param query path to input file in fasta format.
 #' @param subject path to subject file in fasta format or blast-able database.
-#' @param output_path path to folder at which DIAMOND output table shall be stored.
+#' @param output_path path to folder at which DIAMOND2 output table shall be stored.
 #' Default is \code{output_path = NULL} (hence \code{getwd()} is used).
 #' @param is_subject_db logical specifying whether or not the \code{subject} file is a file in fasta format (\code{is_subject_db = FALSE}; default)
 #' or a \code{fasta} file that was previously converted into a blast-able database using \code{diamond makedb} (\code{is_subject_db = TRUE}).
@@ -20,10 +20,7 @@
 #'   \item \code{sensitivity_mode = "very-sensitive"} : sensitive alignment mode.
 #'   \item \code{sensitivity_mode = "ultra-sensitive"} : most sensitive alignment mode (sensitivity as high as BLASTP).
 #' }
-#' @param db_import shall the DIAMOND hit output be stored in a PostgresSQL database and shall a connection be established to this database? Default is \code{db_import = FALSE}.
-#' In case users wish to to only generate a DIAMOND output file without importing it to the current R session they can specify \code{db_import = NULL}.
-#' @param postgres_user when \code{db_import = TRUE} and \code{out_format = "postgres"} is selected, the DIAMOND output is imported and stored in a
-#' PostgresSQL database. In that case, users need to have PostgresSQL installed and initialized on their system.
+#' @param use_arrow_duckdb_connection shall DIAMOND2 hit output table be transformed to an in-process (big data disk-processing) arrow connection to DuckDB? This is useful when the DIAMOND2 output table to too large to fit into memory. Default is \code{use_arrow_duckdb_connection = FALSE}.
 #' Please consult the Installation Vignette for details.
 #' @param evalue Expectation value (E) threshold for saving hits (default: \code{evalue = 0.001}).
 #' @param out_format a character string specifying the format of the file in which the DIAMOND results shall be stored.
@@ -50,7 +47,7 @@
 #'               subject = system.file('seqs/sbj_aa.fa', package = 'rdiamond'),
 #'               sensitivity_mode = "ultra-sensitive",
 #'               output_path = tempdir(),
-#'               db_import  = FALSE)
+#'               use_arrow_duckdb_connection  = FALSE)
 #'
 #' # look at DIAMOND results
 #' diamond_example
@@ -63,7 +60,7 @@
 #' subject = system.file('seqs/sbj_aa.fa', package = 'rdiamond'),
 #' sensitivity_mode = "ultra-sensitive", diamond_exec_path = "/opt/miniconda3/bin/",
 #' output_path = tempdir(),
-#' db_import  = FALSE, cores = 2)
+#' use_arrow_duckdb_connection  = FALSE, cores = 2)
 #'
 #' # look at DIAMOND results
 #' diamond_example_conda
@@ -78,7 +75,7 @@
 #' sensitivity_mode = "ultra-sensitive",
 #' max_target_seqs = 500,
 #' output_path = tempdir(),
-#' db_import  = FALSE,
+#' use_arrow_duckdb_connection  = FALSE,
 #' add_diamond_options = "--block-size 4.0 --compress 1 --no-self-hits",
 #' cores = 1
 #' )
@@ -96,7 +93,7 @@
 #' sensitivity_mode = "ultra-sensitive",
 #' max_target_seqs = 500,
 #' output_path = tempdir(),
-#' db_import  = FALSE,
+#' use_arrow_duckdb_connection  = FALSE,
 #' add_makedb_options = "--taxonnames",
 #' cores = 1
 #' )
@@ -113,8 +110,7 @@ diamond_protein_to_protein <- function(query,
                                        is_subject_db = FALSE,
                                        task = "blastp",
                                        sensitivity_mode = "ultra-sensitive",
-                                       db_import = FALSE,
-                                       postgres_user = NULL,
+                                       use_arrow_duckdb_connection = FALSE,
                                        evalue   = 1E-3,
                                        out_format = "csv",
                                        cores = 1,
@@ -125,15 +121,8 @@ diamond_protein_to_protein <- function(query,
                                        add_diamond_options = NULL) {
 
   if (!is_diamond_installed(diamond_exec_path))
-    stop("Please install a valid version of DIAMOND.", call. = FALSE)
+    stop("Please install a valid version of DIAMOND2.", call. = FALSE)
 
-  if (!is.null(db_import)) {
-    if (db_import) {
-      if (!is.element(out_format, c("xml", "tab", "csv")))
-        stop("Only output formats: 'xml', 'tab', or 'csv' can be imported so far.",
-             call. = FALSE)
-    }
-  }
 
   if (!is.element(
     sensitivity_mode,
@@ -178,7 +167,7 @@ diamond_protein_to_protein <- function(query,
 
   if (!is.element(task, c("blastp")))
     stop(
-      "Please choose a protein-protein comparison task that is supported by DIAMOND: task = 'blastp'",
+      "Please choose a protein-protein comparison task that is supported by DIAMOND2: task = 'blastp'",
       call. = FALSE
     )
 
@@ -196,7 +185,7 @@ diamond_protein_to_protein <- function(query,
   if (!is.null(diamond_exec_path)) {
     message("\n")
     message(
-      "Running diamond with '",
+      "Running diamond2 with '",
       diamond_exec_path,
       "/diamond blastp ",
       " with  query: ",
@@ -217,7 +206,7 @@ diamond_protein_to_protein <- function(query,
   if (is.null(diamond_exec_path)) {
     message("\n")
     message(
-      "Starting 'diamond blastp ",
+      "Starting 'diamond2 blastp ",
       " with  query: ",
       query,
       " and subject: ",
@@ -354,36 +343,29 @@ tryCatch({
   )}, error = function(e) {stop("Something went wring when trying to run 'diamond blastp', please check your input data and whether the diamond executable is installed properly.",
                       call. = FALSE)})
 
-  if (!is.null(db_import)) {
-    if (db_import) {
-      diamond_tbl <- read_diamond(file = output_read_diamond,
-                              out_format = "postgres",
-                              postgres_user = postgres_user)
-      message("\n")
-      message(
-        "DIAMOND search finished successfully!"
-      )
-      message("\n")
-      message("A Postgres database connection to the DIAMOND output file has been generated. The DIAMOND output file can be found at: ",
-              output_blast)
-      return(diamond_tbl)
+  if (use_arrow_duckdb_connection) {
+    diamond_tbl <- read_diamond(file = output_read_diamond,
+                                out_format = out_format,
+                                use_arrow_duckdb_connection = use_arrow_duckdb_connection)
+    message("\n")
+    message("DIAMOND2 search finished successfully!")
+    message("\n")
+    message(
+      "A Arrow->DuckDB database connection to the DIAMOND2 output file has been generated."
+    )
+    return(diamond_tbl)
     } else {
       diamond_tbl <- read_diamond(file = output_read_diamond,
                               out_format = out_format,
-                              postgres_user = NULL)
+                              use_arrow_duckdb_connection = use_arrow_duckdb_connection)
 
       message("\n")
       message(
-        "DIAMOND search finished successfully! "
+        "DIAMOND2 search finished successfully! "
       )
       message("\n")
-      message("The DIAMOND output file was imported into the running R session. The DIAMOND output file has been stored at: ",
+      message("The DIAMOND2 output file was imported into the running R session. The DIAMOND2 output file has been stored at: ",
               output_diamond)
       return(diamond_tbl)
     }
-  } else {
-    message("\n")
-    message("DIAMOND search finished! DIAMOND output file has been stored at: ",
-            output_diamond)
-  }
 }
