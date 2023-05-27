@@ -12,13 +12,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="R interface to the DIAMOND Sequence Aligner">
-<meta property="og:description" content="R interface to the DIAMOND Sequence Aligner. ">
+<meta property="og:description" content="R interface to the DIAMOND2 Pairwise Sequence Aligner. ">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">rdiamond</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -62,74 +58,72 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="rdiamond" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#rdiamond" class="anchor"></a>rdiamond</h1></div>
-<div id="an-easy-to-use-framework-to-perform-massive-diamond-sequence-searches-with-r" class="section level2">
-<h2 class="hasAnchor">
-<a href="#an-easy-to-use-framework-to-perform-massive-diamond-sequence-searches-with-r" class="anchor"></a>An easy-to-use framework to perform massive <a href="http://www.diamondsearch.org/index.php">DIAMOND</a> sequence searches with R</h2>
-<div id="motivation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#motivation" class="anchor"></a>Motivation</h3>
-<p><strong>Homepage</strong>: <a href="https://drostlab.github.io/rdiamond/" class="uri">https://drostlab.github.io/rdiamond/</a></p>
-<p><a href="http://www.diamondsearch.org/index.php">DIAMOND</a> is a sequence aligner for protein and translated DNA searches, designed for high performance analysis of big sequence data. The key features are:</p>
+<div class="section level1">
+<div class="page-header"><h1 id="rdiamond">rdiamond<a class="anchor" aria-label="anchor" href="#rdiamond"></a>
+</h1></div>
+<div class="section level2">
+<h2 id="an-easy-to-use-framework-to-perform-massive-diamond-sequence-searches-with-r">An easy-to-use framework to perform massive <a href="http://www.diamondsearch.org/index.php" class="external-link">DIAMOND</a> sequence searches with R<a class="anchor" aria-label="anchor" href="#an-easy-to-use-framework-to-perform-massive-diamond-sequence-searches-with-r"></a>
+</h2>
+<div class="section level3">
+<h3 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
+</h3>
+<p><strong>Homepage</strong>: <a href="https://drostlab.github.io/rdiamond/" class="external-link uri">https://drostlab.github.io/rdiamond/</a></p>
+<p><a href="http://www.diamondsearch.org/index.php" class="external-link">DIAMOND</a> is a sequence aligner for protein and translated DNA searches, designed for high performance analysis of big sequence data. The key features are:</p>
 <ul>
 <li>Pairwise alignment of proteins and translated DNA at 100x-20,000x speed of BLAST.</li>
 <li>Frameshift alignments for long read analysis.</li>
 <li>Low resource requirements and suitable for running on standard desktops or laptops.</li>
 <li>Various output formats, including BLAST pairwise, tabular and XML, as well as taxonomic classification.</li>
 </ul>
-<p>The <code>rdiamond</code> package provides easy-to-use interface functions between R and the standalone command line tool <a href="http://www.diamondsearch.org/index.php">DIAMOND</a>.</p>
+<p>The <code>rdiamond</code> package provides easy-to-use interface functions between R and the standalone command line tool <a href="http://www.diamondsearch.org/index.php" class="external-link">DIAMOND</a>.</p>
 <p><code>rdiamond</code> is designed to enable a new level of data-driven genomics research by providing the computational tools and data science standards needed to perform reproducible genomics research at scale.</p>
-<p>The exponentially growing number of available sequences in biological databases revolutionizes the way modern life science research is conducted. Approximately hundred thousand genomic sequences spanning diverse species from the tree of life are currently publicly available and free to access. It is now possible to access and retrieve this data automatically using the R package <a href="https://github.com/ropensci/biomartr">biomartr</a> and the next step is to harness this wealth of sequence diversity to explore and detect novel patterns of evolvability, variation, and disease emergence using <code>rdiamond</code>.</p>
-<p>The R package <a href="https://github.com/ropensci/biomartr">biomartr</a> <strong>solves the problem of retrieving this vast amount of biological sequence data</strong> in a standardized and computationally reproducible way and the <code>rdiamond</code> package aims to <strong>solve the problem of performing massive sequence searches on a tree-of-life scale</strong> in a standardized and computationally reproducible way.</p>
-<p>Both packages, <code>biomartr</code> and <code>rdiamond</code> are designed to complement each other seamlessly to provide users with a tool set to automatically retrieve thousands of biological sequences (thousands of genomes, proteomes, annotations, etc) and to use these sequences to perform massive sequence searches with <a href="http://www.diamondsearch.org/index.php">DIAMOND</a> to extract novel patterns of similarity and divergence between large sets of species.</p>
+<p>The exponentially growing number of available sequences in biological databases revolutionizes the way modern life science research is conducted. Approximately hundred thousand genomic sequences spanning diverse species from the tree of life are currently publicly available and free to access. It is now possible to access and retrieve this data automatically using the R package <a href="https://github.com/ropensci/biomartr" class="external-link">biomartr</a> and the next step is to harness this wealth of sequence diversity to explore and detect novel patterns of evolvability, variation, and disease emergence using <code>rdiamond</code>.</p>
+<p>The R package <a href="https://github.com/ropensci/biomartr" class="external-link">biomartr</a> <strong>solves the problem of retrieving this vast amount of biological sequence data</strong> in a standardized and computationally reproducible way and the <code>rdiamond</code> package aims to <strong>solve the problem of performing massive sequence searches on a tree-of-life scale</strong> in a standardized and computationally reproducible way.</p>
+<p>Both packages, <code>biomartr</code> and <code>rdiamond</code> are designed to complement each other seamlessly to provide users with a tool set to automatically retrieve thousands of biological sequences (thousands of genomes, proteomes, annotations, etc) and to use these sequences to perform massive sequence searches with <a href="http://www.diamondsearch.org/index.php" class="external-link">DIAMOND</a> to extract novel patterns of similarity and divergence between large sets of species.</p>
 </div>
-<div id="install-rdiamond" class="section level3">
-<h3 class="hasAnchor">
-<a href="#install-rdiamond" class="anchor"></a>Install <code>rdiamond</code>
+<div class="section level3">
+<h3 id="install-rdiamond">Install <code>rdiamond</code>
+<a class="anchor" aria-label="anchor" href="#install-rdiamond"></a>
 </h3>
 </div>
-<div id="for-linux-users" class="section level3">
-<h3 class="hasAnchor">
-<a href="#for-linux-users" class="anchor"></a>For Linux Users:</h3>
+<div class="section level3">
+<h3 id="for-linux-users">For Linux Users:<a class="anchor" aria-label="anchor" href="#for-linux-users"></a>
+</h3>
 <p>Please install the <code>libpq-dev</code> library on you linux machine by typing into the terminal:</p>
 <pre><code>sudo apt-get install libpq-dev</code></pre>
 </div>
-<div id="for-all-systems-install-rdiamond-by-typing" class="section level3">
-<h3 class="hasAnchor">
-<a href="#for-all-systems-install-rdiamond-by-typing" class="anchor"></a>For all systems install <code>rdiamond</code> by typing</h3>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># install Bioconductor</span>
-<span class="co">if</span> (<span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"BiocManager"</span>, quietly = <span class="fl">TRUE</span>))
-    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"BiocManager"</span>)
-<span class="kw">BiocManager</span>::<span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>()
-<span class="co"># install Biostrings -&gt; see here for different Biostrings verions:</span>
-<span class="co"># http://bioconductor.org/about/release-announcements/</span>
-<span class="kw">BiocManager</span>::<span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Biostrings"</span>))
-
-<span class="co"># install.packages("devtools")</span>
-<span class="co"># install the current version of rdiamond on your system</span>
-<span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"drostlab/rdiamond"</span>, build_vignettes = <span class="fl">TRUE</span>, dependencies = <span class="fl">TRUE</span>)
-</pre></div>
+<div class="section level3">
+<h3 id="for-all-systems-install-rdiamond-by-typing">For all systems install <code>rdiamond</code> by typing<a class="anchor" aria-label="anchor" href="#for-all-systems-install-rdiamond-by-typing"></a>
+</h3>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install Bioconductor</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co"># install Biostrings -&gt; see here for different Biostrings verions:</span></span>
+<span><span class="co"># http://bioconductor.org/about/release-announcements/</span></span>
+<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Biostrings"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="co"># install the current version of rdiamond on your system</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"drostlab/rdiamond"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="quick-start" class="section level3">
-<h3 class="hasAnchor">
-<a href="#quick-start" class="anchor"></a>Quick start</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="co"># run diamond assuming that the diamond executable is available</span>
-<span class="co"># via the system path ('diamond_exec_path = NULL') and using</span>
-<span class="co"># sensitivity_mode = "ultra-sensitive"</span>
-<span class="kw">diamond_example</span> <span class="op">&lt;-</span> <span class="kw">rdiamond</span>::<span class="fu"><a href="reference/diamond_protein_to_protein.html">diamond_protein_to_protein</a></span>(
-              query   = <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">'seqs/qry_aa.fa'</span>, package = <span class="st">'rdiamond'</span>),
-              subject = <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">'seqs/sbj_aa.fa'</span>, package = <span class="st">'rdiamond'</span>),
-              sensitivity_mode = <span class="st">"ultra-sensitive"</span>,
-              output_path = <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span>(),
-              db_import  = <span class="fl">FALSE</span>)
-
-<span class="co"># look at DIAMOND results</span>
-<span class="kw">diamond_example</span>
-</pre></div>
+<div class="section level3">
+<h3 id="quick-start">Quick start<a class="anchor" aria-label="anchor" href="#quick-start"></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># run diamond assuming that the diamond executable is available</span></span>
+<span><span class="co"># via the system path ('diamond_exec_path = NULL') and using</span></span>
+<span><span class="co"># sensitivity_mode = "ultra-sensitive"</span></span>
+<span><span class="va">diamond_example</span> <span class="op">&lt;-</span> <span class="fu">rdiamond</span><span class="fu">::</span><span class="fu"><a href="reference/diamond_protein_to_protein.html">diamond_protein_to_protein</a></span><span class="op">(</span></span>
+<span>              query   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'seqs/qry_aa.fa'</span>, package <span class="op">=</span> <span class="st">'rdiamond'</span><span class="op">)</span>,</span>
+<span>              subject <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">'seqs/sbj_aa.fa'</span>, package <span class="op">=</span> <span class="st">'rdiamond'</span><span class="op">)</span>,</span>
+<span>              sensitivity_mode <span class="op">=</span> <span class="st">"ultra-sensitive"</span>,</span>
+<span>              output_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>              use_arrow_duckdb_connection  <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># look at DIAMOND results</span></span>
+<span><span class="va">diamond_example</span></span></code></pre></div>
 <pre><code>Running diamond with 'diamond blastp  with query: /library/rdiamond/seqs/qry_aa.fa and subject: /library/rdiamond/seqs/sbj_aa.fa using 2 core(s) ...
 
 
@@ -249,40 +243,53 @@ The DIAMOND output file was imported into the running R session. The DIAMOND out
 #   bit_score &lt;dbl&gt;, score_raw &lt;dbl&gt;</code></pre>
 </div>
 </div>
-<div id="discussions-and-bug-reports" class="section level2">
-<h2 class="hasAnchor">
-<a href="#discussions-and-bug-reports" class="anchor"></a>Discussions and Bug Reports</h2>
+<div class="section level2">
+<h2 id="discussions-and-bug-reports">Discussions and Bug Reports<a class="anchor" aria-label="anchor" href="#discussions-and-bug-reports"></a>
+</h2>
 <p>I would be very happy to learn more about potential improvements of the concepts and functions provided in this package.</p>
 <p>Furthermore, in case you find some bugs, need additional (more flexible) functionality of parts of this package, or want to contribute to this project please let me know:</p>
-<p><a href="https://github.com/drostlab/rdiamond/issues" class="uri">https://github.com/drostlab/rdiamond/issues</a></p>
+<p><a href="https://github.com/drostlab/rdiamond/issues" class="external-link uri">https://github.com/drostlab/rdiamond/issues</a></p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing rdiamond</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Hajk-Georg Drost <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1567-306X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Hajk-Georg Drost <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-1567-306X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
+
+
 
   </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Hajk-Georg Drost.</p>
+  <p></p>
+<p>Developed by Hajk-Georg Drost.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -290,6 +297,8 @@ The DIAMOND output file was imported into the running R session. The DIAMOND out
 
   
 
+
+  
 
   </body>
 </html>
