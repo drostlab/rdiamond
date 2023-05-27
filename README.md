@@ -75,7 +75,7 @@ diamond_example <- rdiamond::diamond_protein_to_protein(
               subject = system.file('seqs/sbj_aa.fa', package = 'rdiamond'),
               sensitivity_mode = "ultra-sensitive",
               output_path = tempdir(),
-              db_import  = FALSE)
+              use_arrow_duckdb_connection  = FALSE)
 
 # look at DIAMOND results
 diamond_example
