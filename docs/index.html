@@ -62,24 +62,14 @@
 <div class="page-header"><h1 id="rdiamond">rdiamond<a class="anchor" aria-label="anchor" href="#rdiamond"></a>
 </h1></div>
 <div class="section level2">
-<h2 id="an-easy-to-use-framework-to-perform-massive-diamond-sequence-searches-with-r">An easy-to-use framework to perform massive <a href="http://www.diamondsearch.org/index.php" class="external-link">DIAMOND</a> sequence searches with R<a class="anchor" aria-label="anchor" href="#an-easy-to-use-framework-to-perform-massive-diamond-sequence-searches-with-r"></a>
+<h2 id="running-diamond2-through-r">Running <a href="https://github.com/bbuchfink/diamond" class="external-link">DIAMOND2</a> through R<a class="anchor" aria-label="anchor" href="#running-diamond2-through-r"></a>
 </h2>
 <div class="section level3">
 <h3 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h3>
-<p><strong>Homepage</strong>: <a href="https://drostlab.github.io/rdiamond/" class="external-link uri">https://drostlab.github.io/rdiamond/</a></p>
-<p><a href="http://www.diamondsearch.org/index.php" class="external-link">DIAMOND</a> is a sequence aligner for protein and translated DNA searches, designed for high performance analysis of big sequence data. The key features are:</p>
-<ul>
-<li>Pairwise alignment of proteins and translated DNA at 100x-20,000x speed of BLAST.</li>
-<li>Frameshift alignments for long read analysis.</li>
-<li>Low resource requirements and suitable for running on standard desktops or laptops.</li>
-<li>Various output formats, including BLAST pairwise, tabular and XML, as well as taxonomic classification.</li>
-</ul>
-<p>The <code>rdiamond</code> package provides easy-to-use interface functions between R and the standalone command line tool <a href="http://www.diamondsearch.org/index.php" class="external-link">DIAMOND</a>.</p>
-<p><code>rdiamond</code> is designed to enable a new level of data-driven genomics research by providing the computational tools and data science standards needed to perform reproducible genomics research at scale.</p>
-<p>The exponentially growing number of available sequences in biological databases revolutionizes the way modern life science research is conducted. Approximately hundred thousand genomic sequences spanning diverse species from the tree of life are currently publicly available and free to access. It is now possible to access and retrieve this data automatically using the R package <a href="https://github.com/ropensci/biomartr" class="external-link">biomartr</a> and the next step is to harness this wealth of sequence diversity to explore and detect novel patterns of evolvability, variation, and disease emergence using <code>rdiamond</code>.</p>
-<p>The R package <a href="https://github.com/ropensci/biomartr" class="external-link">biomartr</a> <strong>solves the problem of retrieving this vast amount of biological sequence data</strong> in a standardized and computationally reproducible way and the <code>rdiamond</code> package aims to <strong>solve the problem of performing massive sequence searches on a tree-of-life scale</strong> in a standardized and computationally reproducible way.</p>
-<p>Both packages, <code>biomartr</code> and <code>rdiamond</code> are designed to complement each other seamlessly to provide users with a tool set to automatically retrieve thousands of biological sequences (thousands of genomes, proteomes, annotations, etc) and to use these sequences to perform massive sequence searches with <a href="http://www.diamondsearch.org/index.php" class="external-link">DIAMOND</a> to extract novel patterns of similarity and divergence between large sets of species.</p>
+<p>We recently introduced <a href="https://www.nature.com/articles/s41592-021-01101-x" class="external-link">DIAMOND2</a> as pairwise protein aligner ready to scale to the demands of the <a href="https://www.earthbiogenome.org/" class="external-link">Earth BioGenome Project</a> and other tree-of-life scale genomics projects.</p>
+<p>The <code>rdiamond</code> package provides easy-to-use interface functions for running <a href="https://github.com/bbuchfink/diamond" class="external-link">DIAMOND2</a> through R and processing even TB worth of DIAMOND2 hit output files from disk (instead of in-memory) on a local machine.</p>
+<p>In combination with the R package <a href="https://github.com/ropensci/biomartr" class="external-link">biomartr</a>, users can automatically retrieve genomic data at scale and then search it with <code>rdiamond</code>.</p>
 </div>
 <div class="section level3">
 <h3 id="install-rdiamond">Install <code>rdiamond</code>
