@@ -2,9 +2,9 @@
 % Please edit documentation in R/read_diamond.R
 \name{read_diamond}
 \alias{read_diamond}
-\title{Import DIAMOND output file}
+\title{Import DIAMOND2 output file}
 \usage{
-read_diamond(file, out_format, postgres_user = NULL)
+read_diamond(file, out_format, use_arrow_duckdb_connection = FALSE)
 }
 \arguments{
 \item{file}{path to BLAST output file.}
@@ -12,12 +12,11 @@ read_diamond(file, out_format, postgres_user = NULL)
 \item{out_format}{a character string specifying the output format of the BLAST output that shall be imported.
 Available options are:
  \itemize{
- \item \code{out_format = "postgres"} : store BLAST output as Postgres database and generate postgres database connection.
  \item \code{out_format = "xml"} : XML
  \item \code{out_format = "csv"} : Comma-separated values
  }}
 
-\item{postgres_user}{specify username for RPostgreSQL connection.}
+\item{use_arrow_duckdb_connection}{shall DIAMOND2 hit output table be transformed to an in-process (big data disk-processing) arrow connection to DuckDB? This is useful when the DIAMOND2 output table to too large to fit into memory. Default is \code{use_arrow_duckdb_connection = FALSE}.}
 }
 \description{
 When performing BLAST searches with the \code{blast_*()} functions,
