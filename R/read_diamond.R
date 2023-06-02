@@ -9,14 +9,14 @@
 #'  \item \code{out_format = "xml"} : XML
 #'  \item \code{out_format = "csv"} : Comma-separated values
 #'  }
-#' @param use_arrow_duckdb_connection shall DIAMOND2 hit output table be transformed to an in-process (big data disk-processing) arrow connection to DuckDB? This is useful when the DIAMOND2 output table to too large to fit into memory. Default is \code{use_arrow_duckdb_connection = FALSE}. 
+#' @param use_arrow_duckdb_connection shall DIAMOND2 hit output table be transformed to an in-process (big data disk-processing) arrow connection to DuckDB? This is useful when the DIAMOND2 output table to too large to fit into memory. Default is \code{use_arrow_duckdb_connection = FALSE}.
 #' @author Hajk-Georg Drost
 #' @seealso \code{\link{diamond_protein_to_protein}}
 #' @export
 
 read_diamond <- function(file, out_format, use_arrow_duckdb_connection = FALSE) {
 
-  if (!file.exists(file))
+  if (!fs::file_exists(file))
     stop("The DIAMOND2 output file '", file, "' does not exist! Please check what might have went wrong with the DIAMOND2 call.", call. = FALSE)
 
   if (!is.element(
@@ -48,11 +48,11 @@ read_diamond <- function(file, out_format, use_arrow_duckdb_connection = FALSE) 
        # import_blast_tbl <- sparklyr::copy_to(sparkconnect, iris,
        #                                       "spark_blast_tbl",
        #                                        overwrite = TRUE)
-     
+
        #require(RPostgreSQL)
 
        # postgres_filename <- paste0(unlist(stringr::str_split(basename(file),"[.]"))[1],"_postgres")
-       # 
+       #
        # connect_db <-
        #     DBI::dbConnect(
        #         DBI::dbDriver("PostgreSQL"),
@@ -61,7 +61,7 @@ read_diamond <- function(file, out_format, use_arrow_duckdb_connection = FALSE) 
        #         host = "localhost",
        #         port = 5432,
        #         dbname = postgres_user)
-       # 
+       #
        # DBI::dbWriteTable(
        #     connect_db,
        #     name      = postgres_filename,
@@ -71,7 +71,7 @@ read_diamond <- function(file, out_format, use_arrow_duckdb_connection = FALSE) 
        #     sep       = "\t",
        #     overwrite = TRUE
        # )
-       # 
+       #
        # blast_sql_db <-
        #     dplyr::src_postgres(
        #         dbname = postgres_user,
@@ -80,18 +80,18 @@ read_diamond <- function(file, out_format, use_arrow_duckdb_connection = FALSE) 
        #         user = postgres_user,
        #         password = ""
        #     )
-       # 
+       #
        # blast_postgres <-
        #     dplyr::tbl(blast_sql_db, postgres_filename)
-       # 
+       #
        # on.exit({
        #     #sparklyr::spark_disconnect(sparkconnect)
        #     DBI::dbDisconnect(connect_db)
-       # 
+       #
        # })
      # query_id -> subject_id -> perc_identity -> num_ident_matches -> alig_length -> mismatches -> gap_openings -> n_gaps -> pos_match -> ppos -> q_start -> q_end -> q_len ->
      #   qcovhsp -> s_start -> s_end -> s_len -> evalue -> bit_score -> score_raw -> NULL
-     
+
      diamond_duckdb <-
        arrow::open_tsv_dataset(
          file,
@@ -140,7 +140,7 @@ read_diamond <- function(file, out_format, use_arrow_duckdb_connection = FALSE) 
          bit_score  = f18,
          score_raw  = f19
        )
-     
+
        return(diamond_duckdb)
    }
 
