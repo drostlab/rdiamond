@@ -1,42 +1,17 @@
 # rdiamond
 
-## An easy-to-use framework to perform massive [DIAMOND](http://www.diamondsearch.org/index.php) sequence searches with R
+## Running [DIAMOND2](https://github.com/bbuchfink/diamond) through R
 
 ### Motivation 
 
-__Homepage__: https://drostlab.github.io/rdiamond/ 
+We recently introduced [DIAMOND2](https://www.nature.com/articles/s41592-021-01101-x) as pairwise protein aligner ready to scale to the demands of the [Earth BioGenome Project](https://www.earthbiogenome.org/) and other tree-of-life scale genomics projects.
 
-[DIAMOND](http://www.diamondsearch.org/index.php) is a sequence aligner for protein and translated DNA searches, designed for high performance analysis of big sequence data. The key features are:
+The `rdiamond` package provides easy-to-use interface functions for running [DIAMOND2](https://github.com/bbuchfink/diamond) through R and processing even TB worth of DIAMOND2 hit output files from disk (instead of in-memory) on a local machine. 
 
-- Pairwise alignment of proteins and translated DNA at 100x-20,000x speed of BLAST.
-- Frameshift alignments for long read analysis.
-- Low resource requirements and suitable for running on standard desktops or laptops.
-- Various output formats, including BLAST pairwise, tabular and XML, as well as taxonomic classification.
 
-The `rdiamond` package provides easy-to-use interface functions between R and the standalone command line tool [DIAMOND](http://www.diamondsearch.org/index.php). 
+In combination with the R package [biomartr](https://github.com/ropensci/biomartr), users
+can automatically retrieve genomic data at scale and then search it with `rdiamond`.
 
-`rdiamond` is designed to enable a new level of data-driven genomics
-research by providing the computational tools and data science standards needed
-to perform reproducible genomics research at scale.
-
-The exponentially growing number of available sequences in biological databases
-revolutionizes the way modern life science research is conducted. Approximately
-hundred thousand genomic sequences spanning diverse species from the tree of life
-are currently publicly available and free to access. It is now possible to
-access and retrieve this data automatically using the R package [biomartr](https://github.com/ropensci/biomartr)
-and the next step is to harness this wealth of sequence diversity to explore
-and detect novel patterns of evolvability, variation, and disease emergence using `rdiamond`.
-
-The R package [biomartr](https://github.com/ropensci/biomartr)
-__solves the problem of retrieving this vast amount of biological sequence data__ in a standardized and computationally reproducible way and the `rdiamond` package aims to __solve the problem of performing massive 
-sequence searches on a tree-of-life scale__ in a standardized and computationally reproducible way. 
-
-Both packages, `biomartr` and `rdiamond` are designed to complement
-each other seamlessly to provide users with a tool set to automatically
-retrieve thousands of biological sequences (thousands of genomes, proteomes, annotations, etc)
-and to use these sequences to perform massive sequence searches with [DIAMOND](http://www.diamondsearch.org/index.php) to
-extract novel patterns of similarity and divergence between large sets
-of species.
 
 ### Install `rdiamond`
 
