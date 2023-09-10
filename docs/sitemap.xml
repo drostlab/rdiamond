@@ -22,10 +22,19 @@
     <loc>/reference/diamond_protein_to_protein.html</loc>
   </url>
   <url>
+    <loc>/reference/diamond_protein_to_protein_best_hits.html</loc>
+  </url>
+  <url>
+    <loc>/reference/diamond_protein_to_protein_best_reciprocal_hits.html</loc>
+  </url>
+  <url>
     <loc>/reference/file_contains_aa.html</loc>
   </url>
   <url>
     <loc>/reference/file_contains_dna.html</loc>
+  </url>
+  <url>
+    <loc>/reference/filter_best_hits.html</loc>
   </url>
   <url>
     <loc>/reference/index.html</loc>
