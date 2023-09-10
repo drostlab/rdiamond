@@ -2,6 +2,8 @@
 
 export(diamond_protein_against_ncbi_nr)
 export(diamond_protein_to_protein)
+export(diamond_protein_to_protein_best_hits)
+export(diamond_protein_to_protein_best_reciprocal_hits)
 export(file_contains_aa)
 export(file_contains_dna)
 export(list_outformats)
