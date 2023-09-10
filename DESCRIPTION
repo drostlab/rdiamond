@@ -1,6 +1,6 @@
 Package: rdiamond
-Title: R interface to the DIAMOND Sequence Aligner
-Version: 0.0.0.9000
+Title: Seamless Integration of DIAMOND2 Sequence Searches in R
+Version: 0.0.1
 Authors@R: 
     person(given = "Hajk-Georg",
            family = "Drost",
@@ -8,7 +8,7 @@ Authors@R:
            email = "hajk-georg.drost@tuebingen.mpg.de",
            comment = c(ORCID = "0000-0002-1567-306X"))
 Description: R interface to the DIAMOND2 Pairwise Sequence Aligner. 
-License: GPL-3
+License: GPL-2
 Encoding: UTF-8
 LazyData: true
 Suggests: 
