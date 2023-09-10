@@ -1,17 +1,19 @@
+![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdrostlab%2Frdiamond&label=VISITORS&countColor=%23263759&style=flat)
+
+
 # rdiamond
 
-## Running [DIAMOND2](https://github.com/bbuchfink/diamond) through R
+## Seamless Integration of [DIAMOND2](https://github.com/bbuchfink/diamond)  Sequence Searches in R
 
 ### Motivation 
 
-We recently introduced [DIAMOND2](https://www.nature.com/articles/s41592-021-01101-x) as pairwise protein aligner ready to scale to the demands of the [Earth BioGenome Project](https://www.earthbiogenome.org/) and other tree-of-life scale genomics projects.
+We are excited to introduce [DIAMOND2](https://www.nature.com/articles/s41592-021-01101-x), a cutting-edge pairwise protein aligner tailored to meet the extensive demands of the [Earth BioGenome Project](https://www.earthbiogenome.org/) and other expansive genomics initiatives. [DIAMOND2](https://github.com/bbuchfink/diamond) is a groundbreaking software solution designed to accelerate `BLAST` searches by an factor of up to 10,000x. To offer researchers even more flexibility and integration, we provide `rdiamond`, a dedicated interface package that allows programmatic handling of [DIAMOND2](https://github.com/bbuchfink/diamond) sequence searches directly through R. 
 
-The `rdiamond` package provides easy-to-use interface functions for running [DIAMOND2](https://github.com/bbuchfink/diamond) through R and processing even TB worth of DIAMOND2 hit output files from disk (instead of in-memory) on a local machine. 
+The `rdiamond` package offers streamlined interface functions, enabling users to seamlessly run [DIAMOND2](https://github.com/bbuchfink/diamond) directly within R. Notably, it's designed to handle vast outputs, processing terabytes of [DIAMOND2](https://github.com/bbuchfink/diamond) hit files directly from the disk on a local machine, bypassing memory limitations.
 
+Furthermore, when paired with the [biomartr](https://github.com/ropensci/biomartr) R package, users have the convenience of automatically fetching large-scale genomic data and subsequently searching through it using rdiamond."
 
-In combination with the R package [biomartr](https://github.com/ropensci/biomartr), users
-can automatically retrieve genomic data at scale and then search it with `rdiamond`.
-
+This version emphasizes the utility and integration capabilities of the rdiamond package while maintaining clarity.
 
 ### Install `rdiamond`
 
@@ -30,6 +32,7 @@ sudo apt-get install libpq-dev
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install()
+
 # install Biostrings -> see here for different Biostrings verions:
 # http://bioconductor.org/about/release-announcements/
 BiocManager::install(c("Biostrings"))
@@ -38,6 +41,14 @@ BiocManager::install(c("Biostrings"))
 # install the current version of rdiamond on your system
 devtools::install_github("drostlab/rdiamond", build_vignettes = TRUE, dependencies = TRUE)
 ```
+
+### Citation
+
+This R package is not formally published yet, but please please cite the following paper when using this software for your research:
+
+> Buchfink B, Reuter K, Drost HG, "Sensitive protein alignments at tree-of-life scale using DIAMOND", Nature Methods 18, 366–368 (2021). [doi:10.1038/s41592-021-01101-x](https://www.nature.com/articles/s41592-021-01101-x)
+
+
 
 ### Quick start
  
@@ -54,7 +65,6 @@ diamond_example <- rdiamond::diamond_protein_to_protein(
 
 # look at DIAMOND results
 diamond_example
-
 ```
 
 ```
@@ -180,6 +190,36 @@ A tibble: 20 x 20
 #   bit_score <dbl>, score_raw <dbl>
 ```
 
+or 
+
+```r
+dplyr::glimpse(diamond_example)
+```
+
+```
+Rows: 20
+Columns: 20
+$ query_id          <chr> "333554|PACid:16033839", "470181|PACid:16064328", "470180|PAC…
+$ subject_id        <chr> "AT1G01010.1", "AT1G01020.1", "AT1G01030.1", "AT1G01040.1", "…
+$ perc_identity     <dbl> 73.2, 91.1, 93.3, 93.4, 100.0, 87.5, 92.6, 89.3, 96.8, 87.7, …
+$ num_ident_matches <int> 347, 224, 335, 1840, 213, 567, 339, 268, 420, 463, 525, 446, …
+$ alig_length       <int> 474, 246, 359, 1969, 213, 648, 366, 300, 434, 528, 529, 453, …
+$ mismatches        <int> 75, 22, 20, 58, 0, 71, 23, 25, 8, 65, 4, 6, 68, 30, 0, 20, 30…
+$ gap_openings      <int> 8, 0, 2, 7, 0, 5, 2, 2, 3, 0, 0, 1, 3, 2, 1, 1, 1, 0, 0, 0
+$ n_gaps            <int> 52, 0, 4, 71, 0, 10, 4, 7, 6, 0, 0, 1, 10, 8, 14, 3, 1, 0, 0,…
+$ pos_match         <int> 369, 231, 338, 1870, 213, 587, 342, 275, 425, 475, 527, 448, …
+$ ppos              <dbl> 77.8, 93.9, 94.2, 95.0, 100.0, 90.6, 93.4, 91.7, 97.9, 90.0, …
+$ q_start           <int> 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 16, 2, 4, 1, 6, 1, 1, 1
+$ q_end             <int> 466, 246, 355, 1963, 213, 640, 362, 299, 433, 528, 529, 453, …
+$ q_len             <int> 466, 246, 355, 1963, 213, 640, 362, 299, 433, 528, 529, 453, …
+$ qcovhsp           <dbl> 100.0, 100.0, 100.0, 99.9, 100.0, 100.0, 100.0, 100.0, 100.0,…
+$ s_start           <int> 1, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 5, 4, 2, 1, 1, 1, 1, 1
+$ s_end             <int> 430, 246, 359, 1910, 213, 646, 366, 294, 429, 528, 529, 452, …
+$ s_len             <int> 430, 246, 359, 1910, 213, 646, 366, 294, 429, 528, 529, 452, …
+$ evalue            <dbl> 1.83e-212, 2.79e-157, 4.66e-209, 0.00e+00, 4.51e-158, 0.00e+0…
+$ bit_score         <dbl> 584, 428, 568, 3541, 427, 1041, 613, 499, 816, 841, 1029, 866…
+$ score_raw         <dbl> 1506, 1100, 1464, 9181, 1098, 2691, 1581, 1284, 2108, 2172, 2…
+```
 
 ## Discussions and Bug Reports
 
