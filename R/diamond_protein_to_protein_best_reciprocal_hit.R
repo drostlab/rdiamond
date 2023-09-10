@@ -1,4 +1,4 @@
-#' @title Perform a DIAMOND Protein to Protein best reciprocal hit search
+#' @title Perform a DIAMOND2 Protein to Protein best reciprocal hit search
 #' @description This function performs a DIAMOND search (best reciprocal hit) of a given set of protein sequences against a given database.
 #' @param query a character string specifying the path to the protein sequence file of interest (query organism).
 #' @param subject a character string specifying the path to the protein sequence file of interest (subject organism).

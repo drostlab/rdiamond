@@ -2,7 +2,7 @@
 % Please edit documentation in R/diamond_protein_against_ncbi_nr.R
 \name{diamond_protein_against_ncbi_nr}
 \alias{diamond_protein_against_ncbi_nr}
-\title{Perform Protein to Protein DIAMOND2 Searches (BLASTP)}
+\title{Perform Protein to Protein DIAMOND2 Searches (BLASTP) against the NCBI non-redundant (NR) database}
 \usage{
 diamond_protein_against_ncbi_nr(
   query,

@@ -1,4 +1,4 @@
-#' @title Perform Protein to Protein DIAMOND2 Searches (BLASTP)
+#' @title Perform Protein to Protein DIAMOND2 Searches (BLASTP) against the NCBI non-redundant (NR) database 
 #' @description Run protein to protein DIAMOND2 of reference sequences
 #' against a blast-able database or fasta file.
 #' @param query path to input file in fasta format.

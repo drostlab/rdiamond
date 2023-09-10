@@ -3,7 +3,7 @@
 %   R/diamond_protein_to_protein_best_reciprocal_hit.R
 \name{diamond_protein_to_protein_best_reciprocal_hits}
 \alias{diamond_protein_to_protein_best_reciprocal_hits}
-\title{Perform a DIAMOND Protein to Protein best reciprocal hit search}
+\title{Perform a DIAMOND2 Protein to Protein best reciprocal hit search}
 \usage{
 diamond_protein_to_protein_best_reciprocal_hits(
   query,

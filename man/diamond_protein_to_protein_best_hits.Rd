@@ -2,7 +2,7 @@
 % Please edit documentation in R/diamond_protein_to_protein_best_hits.R
 \name{diamond_protein_to_protein_best_hits}
 \alias{diamond_protein_to_protein_best_hits}
-\title{Perform a DIAMOND Protein to Protein best hit search}
+\title{Perform a DIAMOND2 Protein to Protein best hit search}
 \usage{
 diamond_protein_to_protein_best_hits(
   query,
