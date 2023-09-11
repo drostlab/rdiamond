@@ -44,7 +44,7 @@ devtools::install_github("drostlab/rdiamond", build_vignettes = TRUE, dependenci
 
 ### Citation
 
-This R package is not formally published yet, but please please cite the following paper when using this software for your research:
+This R package is not formally published yet, but please cite the following paper when using this software for your research:
 
 > Buchfink B, Reuter K, Drost HG, "Sensitive protein alignments at tree-of-life scale using DIAMOND", Nature Methods 18, 366–368 (2021). [doi:10.1038/s41592-021-01101-x](https://www.nature.com/articles/s41592-021-01101-x)
 
