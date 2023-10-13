@@ -104,6 +104,7 @@ diamond_protein_to_protein_best_hits <- function(
     out_format = out_format,
     evalue  = evalue,
     max_target_seqs = max_target_seqs,
+    cores = cores,
     hard_mask = hard_mask,
     diamond_exec_path = diamond_exec_path,
     add_makedb_options = add_makedb_options,
