@@ -1,7 +1,6 @@
+# rdiamond <img src="man/figures/logo.png" align="right" height="174" width="150" />
+
 ![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Fdrostlab%2Frdiamond&label=VISITORS&countColor=%23263759&style=flat)
-
-
-# rdiamond
 
 ## Seamless Integration of [DIAMOND2](https://github.com/bbuchfink/diamond)  Sequence Searches in R
 
